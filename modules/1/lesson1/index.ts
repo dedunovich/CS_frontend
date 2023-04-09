@@ -1,7 +1,12 @@
 function createBitGetter(arr: Uint8Array) {
   return {
     get(elementNumber: number, bitNumber: number): 0 | 1 {
-      if (bitNumber >= 0 && elementNumber >= 0 && elementNumber < arr.length) {
+      if (
+        bitNumber >= 0 &&
+        bitNumber <= 7 &&
+        elementNumber >= 0 &&
+        elementNumber < arr.length
+      ) {
         return ((arr[elementNumber] >> bitNumber) % 2) as 0 | 1;
       }
     },
@@ -13,6 +18,7 @@ function createBitSetter(arr: Uint8Array) {
     set(elementNumber: number, bitNumber: number, value: 0 | 1): void {
       if (
         bitNumber >= 0 &&
+        bitNumber <= 7 &&
         elementNumber >= 0 &&
         elementNumber < arr.length &&
         (value === 0 || value === 1)
